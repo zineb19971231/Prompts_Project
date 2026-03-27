@@ -1,0 +1,119 @@
+ :root {
+            --primary: #4f46e5;
+            --bg-body: #f4f7fe;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: var(--bg-body);
+            display: flex;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .sidebar-header { padding: 30px 20px; border-bottom: 1px solid #f1f5f9; text-align: center; }
+        .profile-img { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 10px; border: 3px solid var(--primary); object-fit: cover; }
+        .profile-info strong { display: block; color: #1e293b; font-size: 1rem; }
+        .profile-info small { color: #64748b; font-size: 0.8rem; }
+
+        .nav-links { padding: 20px 15px; flex-grow: 1; }
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #475569;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-links a:hover { background: #eef2ff; color: var(--primary); }
+        .nav-links a.active { background: var(--primary); color: white; }
+        .nav-links a i { width: 25px; margin-right: 12px; text-align: center; }
+
+        .logout-area { padding: 20px; border-top: 1px solid #f1f5f9; }
+        .logout-btn { color: #ef4444; text-decoration: none; font-weight: 600; display: block; text-align: center; }
+
+        .main { margin-left: var(--sidebar-width); padding: 40px; width: 100%; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+
+        .btn-add {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        th { background: #f8fafc; padding: 18px; text-align: left; color: #64748b; border-bottom: 2px solid #f1f5f9; }
+        td { padding: 18px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
+        .badge-count { background: #eef2ff; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .close-btn { font-size: 24px; cursor: pointer; color: #94a3b8; }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+        }

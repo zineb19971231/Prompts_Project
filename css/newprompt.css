@@ -1,0 +1,122 @@
+/* Variables de couleurs pour une gestion facile */
+:root {
+      --dg-text-blue: #4a90e2;
+    --primary-hover: #357abd;
+    --bg-color: #f4f7f6;
+    --text-color: #333;
+    --border-color: #ddd;
+    --white: #ffffff;
+    --dg-text-blue: #1e3a8a;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text-color);
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: var(  --dg-text-blue);
+    font-weight: 600;
+    font-size: 35px;
+}
+
+form {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 3px solid var(--border-color);
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical; 
+}
+
+input:focus, 
+textarea:focus, 
+select:focus {
+    outline: none;
+    border-color: var(  --dg-text-blue);
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.2);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 18px;
+    background-color: var(  --dg-text-blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px; 
+    text-align: center;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+}
