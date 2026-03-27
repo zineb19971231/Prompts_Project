@@ -17,6 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']))
     exit();
 }
 
+
 // Stats
 $countPrompts = $pdo->query("SELECT COUNT(*) FROM prompts")->fetchColumn();
 $countCategories = $pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn();
@@ -24,7 +25,19 @@ $countCategories = $pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn()
 // Data
 $sql = 'SELECT p.*, u.name as user_name, c.name as cat_name FROM prompts p 
         JOIN users u ON p.user_id = u.id JOIN categories c ON p.categorie_id = c.id';
+
 $prompts = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+$categories = $pdo-> query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC);
+$categorie_id= $_GET['categorie_id'] ?? 'All';
+if ($categorie_id == 'All'){
+$prompts = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}else{
+    $stmt = $pdo->prepare($sql . ' WHERE p.categorie_id = ?');
+    $stmt -> execute([$categorie_id]);
+    $prompts= $stmt ->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +54,6 @@ $prompts = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         <div class="dg-logo">DevGenius</div>
         <nav class="dg-nav">
             <a href="#" class="dg-nav-item active"><i class="fa-solid fa-house"></i> Dashboard</a>
-            <a href="#" class="dg-nav-item"><i class="fa-solid fa-terminal"></i> Prompts</a>
-            <a href="#" class="dg-nav-item"><i class="fa-solid fa-sliders"></i> Settings</a>
         </nav>
         <div class="dg-logout-box">
             <a href="auth/logout.php" class="dg-btn-logout"><i class="fa-solid fa-power-off"></i> Logout</a>
@@ -79,12 +90,22 @@ $prompts = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-        <div class="dg-table-tools">
-            <div class="dg-search-box">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Rechercher un prompt...">
-            </div>
-        </div>
+<div class="select_cat">
+        <form method="GET">
+          <select name="categorie_id">
+            <option value="All" <?= (!isset($_GET['categorie_id']) || $_GET['categorie_id'] == 'All') ? 'selected' : '' ?>>
+            All Categories
+            </option>
+                <?php foreach($categories as $cat): ?>
+                    <option value="<?= $cat['id'] ?>"
+                        <?= (isset($_GET['categorie_id']) && $_GET['categorie_id'] == $cat['id']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($cat['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+          </select>
+          <button type="submit">Filtrer</button>
+    </form>
+</div>
 
         <section class="dg-table-container">
             <table class="dg-table">
@@ -104,8 +125,9 @@ $prompts = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                             <a href="prompt_details.php?id=<?= $p['id']; ?>" class="dg-view-details">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
-                            <a href="edit.php?id=<?= $p['id']; ?>" class="dg-edit"><i class="fa-solid fa-pen"></i></a>
-                            <form action="" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                            <a href="EditPrompt.php?id=<?= $p['id']; ?>" class="dg-edit"><i class="fa-solid fa-pen"></i></a>
+
+                            <form action="" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure want delete this prompt?');">
                                 <input type="hidden" name="id" value="<?= $p['id']; ?>">
                                 <button type="submit" class="dg-delete-btn">
                                     <i class="fa-solid fa-trash"></i>
