@@ -34,12 +34,13 @@ Elle permet aux utilisateurs d'ajouter, modifier, supprimer et rechercher des pr
 
 ## 🧑‍💻 Rôles utilisateurs
 - **Admin**
-  - Gère les utilisateurs
+  - Gère les catégories
   - Accès complet au système
 - **Développeur**
-  - Ajoute et utilise les prompts
+  - Fontionalités CRUD des prompts
 
 ---
 
 ## 📂 Structure du projet
-<img width="1900" height="898" alt="image" src="https://github.com/user-attachments/assets/763918e0-0ac8-41cd-9b96-7053b784f195" />
+<img width="1891" height="912" alt="image" src="https://github.com/user-attachments/assets/397f7997-1370-4a4e-8bcb-976441c0135b" />
+
