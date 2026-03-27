@@ -85,7 +85,7 @@ $categories = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
                 <td><strong><?= htmlspecialchars($category['name']) ?></strong></td>
                 <td><span class="badge-count"><?= $category['prompt_count'] ?> prompts</span></td>
                 <td>
-                    <a href="edit_category.php?id=<?= $category['id'] ?>" style="color: var(--primary); margin-right: 15px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <!-- <a href="edit_category.php?id=<?= $category['id'] ?>" style="color: var(--primary); margin-right: 15px;"><i class="fa-solid fa-pen-to-square"></i></a> -->
                     <a href="gestion_categories.php?id=<?= $category['id'] ?>" style="color: #ef4444;" onclick="return confirm('are you sure you want to delete this category?');"><i class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
