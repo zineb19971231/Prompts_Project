@@ -42,3 +42,4 @@ Elle permet aux utilisateurs d'ajouter, modifier, supprimer et rechercher des pr
 ---
 
 ## 📂 Structure du projet
+<img width="1900" height="898" alt="image" src="https://github.com/user-attachments/assets/763918e0-0ac8-41cd-9b96-7053b784f195" />
