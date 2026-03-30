@@ -24,19 +24,20 @@ $countCategories = $pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn()
 
 // Data
 $sql = 'SELECT p.*, u.name as user_name, c.name as cat_name FROM prompts p 
-        JOIN users u ON p.user_id = u.id JOIN categories c ON p.categorie_id = c.id';
+        JOIN users u ON p.user_id = u.id JOIN categories c ON p.categorie_id = c.id ';
 
-$prompts = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-$categories = $pdo-> query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC);
+// $categories = $pdo-> query("SELECT * FROM categories")->fetchAll(PDO::FETCH_ASSOC);
 $categorie_id= $_GET['categorie_id'] ?? 'All';
+
 if ($categorie_id == 'All'){
-$prompts = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+ $stmt = $pdo->prepare($sql . ' WHERE p.user_id = ?');
+ $stmt->execute([$user_id]);
 }else{
-    $stmt = $pdo->prepare($sql . ' WHERE p.categorie_id = ?');
-    $stmt -> execute([$categorie_id]);
-    $prompts= $stmt ->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare($sql . ' WHERE p.categorie_id = ? AND p.user_id = ?');
+    $stmt -> execute([$categorie_id, $user_id]);
 }
+$prompts= $stmt ->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 
