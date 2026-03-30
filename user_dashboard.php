@@ -6,8 +6,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'developper') {
     header('Location: auth/login.php');
     exit();
 }
+$user_id = $_SESSION['user_id'];
 
-// Logique de suppression
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']))
 {
     $id = $_POST['id'];
@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']))
 
 
 // Stats
-$countPrompts = $pdo->query("SELECT COUNT(*) FROM prompts")->fetchColumn();
+$countPrompts = $pdo->query("SELECT COUNT(*) FROM prompts where user_id = $user_id")->fetchColumn();
 $countCategories = $pdo->query("SELECT COUNT(*) FROM categories")->fetchColumn();
 
 // Data
